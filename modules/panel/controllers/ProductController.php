@@ -4,6 +4,7 @@ namespace app\modules\panel\controllers;
 
 use app\modules\panel\models\ProductModel;
 use app\modules\panel\models\ProductSearchModel;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -13,9 +14,6 @@ use yii\filters\VerbFilter;
  */
 class ProductController extends Controller
 {
-    /**
-     * @inheritDoc
-     */
     public function behaviors()
     {
         return array_merge(
@@ -31,11 +29,12 @@ class ProductController extends Controller
         );
     }
 
-    /**
-     * Lists all ProductModel models.
-     *
-     * @return string
-     */
+    public function beforeAction($action)
+    {
+        Yii::$app->controller->layout = '/panel';
+        return parent::beforeAction($action);
+    }
+
     public function actionIndex()
     {
         $searchModel = new ProductSearchModel();

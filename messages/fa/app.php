@@ -25,4 +25,7 @@ return [
 	'Product ID' => 'کد کالا',
 	'Product Name' => 'نام کالا',
 	'Product Price' => 'قیمت کالا',
+
+	'Shopping Card' => 'سبد خرید',
+
 ];

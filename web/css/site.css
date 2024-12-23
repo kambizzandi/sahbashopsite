@@ -1,4 +1,4 @@
-html {
+body {
     direction: rtl;
 }
 
@@ -89,4 +89,10 @@ a.desc:after {
 
 .form-group {
     margin-bottom: 1rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    float: right;
+    padding-left: var(--bs-breadcrumb-item-padding-x);
+    /* padding-right: initial; */
 }

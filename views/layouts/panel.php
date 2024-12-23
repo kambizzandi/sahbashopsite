@@ -23,7 +23,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>" class="h-100">
 <head>
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?= Yii::t('app', 'Management Panel') . ' - ' . Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body class="d-flex flex-column h-100">
@@ -32,33 +32,22 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <header id="header">
 <?php
     NavBar::begin([
-        'brandLabel' => Yii::t('app', 'Shop'), //Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => ['class' => 'navbar-expand-md navbar-secondary bg-secondary fixed-top']
+        'brandLabel' => Yii::t('app', 'Management Panel'), //Yii::$app->name,
+        'brandUrl' => '/panel',
+        'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
     ]);
 
-    $items = [
-        // ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => Yii::t('app', 'Products'), 'url' => ['/product/index']],
-        // ['label' => Yii::t('app', 'About'), 'url' => ['/site/about']],
-        // ['label' => Yii::t('app', 'Contact'), 'url' => ['/site/contact']],
-    ];
 
     if (Yii::$app->user->isGuest) {
-        $items[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
-        $items[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup']];
+        $items = [
+            ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']],
+        ];
     } else {
-        $items[] = ['label' => Yii::t('app', 'Shopping Card'), 'url' => ['/basket/index']];
+        if (Yii::$app->user->identity->user_isAdmin == false)
+            throw new \Exception('شما دسترسی مدیریت ندارید');
 
-        if (Yii::$app->user->identity->user_isAdmin) {
-            $items[] = [
-                'label' => Yii::t('app', 'Management Panel'),
-                'url' => ['/panel'],
-                // 'htmlOptions' => ['target' => '_blank'],
-            ];
-        }
-
-        $items[] =
+        $items = [
+            ['label' => Yii::t('app', 'Products'), 'url' => ['/panel/product/index']],
             '<li class="nav-item">'
             . Html::beginForm(['/site/logout'])
             . Html::submitButton(
@@ -67,22 +56,25 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             )
             . Html::endForm()
             . '</li>'
-        ;
+        ];
     }
 
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => $items,
-        'activateParents' => true,
+        // 'activateParents' => true,
     ]);
     NavBar::end();
 ?>
 </header>
 
-<main id="main" class="flex-shrink-0" role="main">
+<main id="panel-main" class="flex-shrink-0" role="main">
     <div class="container">
         <?php if (!empty($this->params['breadcrumbs'])): ?>
-            <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
+            <?= Breadcrumbs::widget([
+                'homeLink' => false,
+                'links' => $this->params['breadcrumbs'],
+                ]) ?>
         <?php endif ?>
         <?= Alert::widget() ?>
         <?= $content ?>
@@ -92,7 +84,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <footer id="footer" class="mt-auto py-3 bg-light">
     <div class="container">
         <div class="row text-muted">
-            <div class="col-md-6 text-center text-md-start">&copy; فروشگاه من <?= date('Y') ?></div>
+            <div class="col-md-6 text-center text-md-start">&copy;<?= date('Y') ?></div>
             <div class="col-md-6 text-center text-md-end"></div>
         </div>
     </div>
