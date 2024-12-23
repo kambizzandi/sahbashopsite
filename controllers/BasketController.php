@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\modules\panel\models\BasketSearchModel;
+use app\modules\panel\models\BasketItemSearchModel;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -30,7 +30,7 @@ class BasketController extends Controller
 
     public function actionIndex()
     {
-        $searchModel = new BasketSearchModel();
+        $searchModel = new BasketItemSearchModel();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
