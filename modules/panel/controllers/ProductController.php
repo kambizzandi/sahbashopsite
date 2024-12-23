@@ -52,10 +52,10 @@ class ProductController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($product_id)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($product_id),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -88,12 +88,12 @@ class ProductController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($product_id)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($product_id);
+        $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'product_id' => $model->product_id]);
+            return $this->redirect(['view', 'id' => $model->product_id]);
         }
 
         return $this->render('update', [
@@ -108,9 +108,9 @@ class ProductController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($product_id)
+    public function actionDelete($id)
     {
-        $this->findModel($product_id)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -122,9 +122,9 @@ class ProductController extends Controller
      * @return ProductModel the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($product_id)
+    protected function findModel($id)
     {
-        if (($model = ProductModel::findOne(['product_id' => $product_id])) !== null) {
+        if (($model = ProductModel::findOne(['product_id' => $id])) !== null) {
             return $model;
         }
 
