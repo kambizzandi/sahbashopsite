@@ -4,6 +4,9 @@ return [
 	'Panel' => 'پنل مدیریت',
 	'Management Panel' => 'پنل مدیریت',
 
+	'Ok' => 'تایید',
+	'Cancel' => 'انصراف',
+
 	'About' => 'معرفی',
 	'Contact' => 'ارتباط با ما',
 	'Login' => 'ورود',
@@ -32,5 +35,10 @@ return [
 	'Payment' => 'پرداخت',
 	'Payment Ok' => 'پرداخت انجام شد',
 	'Payment Failed' => 'پرداخت موفق نبود',
+
+	'Basket Item ID' => 'کد آیتم',
+	'Basket Item Basket ID' => 'کد سبد خرید',
+	'Basket Item Product ID' => 'کد کالا',
+	'Basket Item Qty' => ' تعداد',
 
 ];

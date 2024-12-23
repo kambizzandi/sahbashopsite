@@ -44,12 +44,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'basketItem_id',
                     [
                         'attribute' => 'product_name',
+                        'label' => Yii::t('app', 'Product Name'),
                         'value' => function($model) {
                             return $model->basketItemProduct->product_name;
                         },
                     ],
                     [
                         'attribute' => 'product_price',
+                        'label' => Yii::t('app', 'Product Price'),
                         'value' => function($model) {
                             return $model->basketItemProduct->product_price;
                         },
