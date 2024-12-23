@@ -28,6 +28,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'product_id',
             'product_name',
             'product_price',
+
+            [
+                'class' => ActionColumn::class,
+                'template' => '{add-to-basket}',
+                'buttons' => [
+                    'add-to-basket' => function ($url, $model, $key) {
+                      return Html::a(Yii::t('app', 'Add to basket'), [
+                        '/basket/add-to-basket',
+                        'id' => $model->product_id,
+                      ], [
+                        'class' => 'btn btn-sm btn-success',
+                      ]);
+                    },
+                  ],
+                ],
         ],
     ]); ?>
 

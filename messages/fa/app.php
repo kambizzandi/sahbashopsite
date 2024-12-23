@@ -27,5 +27,10 @@ return [
 	'Product Price' => 'قیمت کالا',
 
 	'Shopping Card' => 'سبد خرید',
+	'Add to basket' => 'افزودن به سبد خرید',
+	'Check out' => 'پرداخت',
+	'Payment' => 'پرداخت',
+	'Payment Ok' => 'پرداخت انجام شد',
+	'Payment Failed' => 'پرداخت موفق نبود',
 
 ];
