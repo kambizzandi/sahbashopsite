@@ -46,7 +46,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
     if (Yii::$app->user->isGuest) {
         $items[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
-        $items[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup']];
+        // $items[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup']];
     } else {
         $items[] = ['label' => Yii::t('app', 'Shopping Card'), 'url' => ['/basket/index']];
 
