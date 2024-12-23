@@ -18,10 +18,18 @@ class BasketController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['index', 'add-to-basket'],
+                'only' => [
+                    'index',
+                    'add-to-basket',
+                    'remove-from-basket',
+                ],
                 'rules' => [
                     [
-                        'actions' => ['index', 'add-to-basket'],
+                        'actions' => [
+                            'index',
+                            'add-to-basket',
+                            'remove-from-basket',
+                        ],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -81,6 +89,29 @@ class BasketController extends Controller
             $basketItemModel->basketItem_qty = 1;
             $basketItemModel->save();
         }
+
+        return $this->redirect('/basket/index');
+    }
+
+    public function actionRemoveFromBasket($id)
+    {
+        $basketItemModel = BasketItemModel::find()
+            ->where(['basketItem_id' => $id])
+            ->one();
+
+        if ($basketItemModel == null)
+            throw new NotFoundHttpException('آیتم پیدا نشد');
+
+        if ($basketItemModel->basketItemBasket->basket_userId != Yii::$app->user->id)
+            throw new \Exception('این آیتم متعلق به شما نیست');
+
+        $basketItemModel->basketItemBasket->basket_totalPrice -=
+            $basketItemModel->basketItemProduct->product_price
+                * $basketItemModel->basketItem_qty;
+
+        $basketItemModel->basketItemBasket->save();
+
+        $basketItemModel->delete();
 
         return $this->redirect('/basket/index');
     }

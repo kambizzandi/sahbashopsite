@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?php
-            if ($model != null)
+            if ($model != null && empty($model->basketItems) == false)
                 echo Html::a(Yii::t('app', 'Check out'), ['checkout'], ['class' => 'btn btn-success']);
         ?>
     </p>
@@ -56,6 +56,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
 
                     'basketItem_qty',
+
+                    [
+                        'class' => ActionColumn::class,
+                        'template' => '{remove}',
+                        'buttons' => [
+                            'remove' => function ($url, $model, $key) {
+                                return Html::a(Yii::t('app', 'Delete'), [
+                                    '/basket/remove-from-basket',
+                                    'id' => $model->basketItem_id,
+                                ], [
+                                    'class' => 'btn btn-sm btn-danger',
+                                ]);
+                            },
+                        ],
+                    ],
+
                 ],
             ]);
         }

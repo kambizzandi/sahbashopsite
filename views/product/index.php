@@ -34,15 +34,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{add-to-basket}',
                 'buttons' => [
                     'add-to-basket' => function ($url, $model, $key) {
-                      return Html::a(Yii::t('app', 'Add to basket'), [
-                        '/basket/add-to-basket',
-                        'id' => $model->product_id,
-                      ], [
-                        'class' => 'btn btn-sm btn-success',
-                      ]);
+                        return Html::a(Yii::t('app', 'Add to basket'), [
+                            '/basket/add-to-basket',
+                            'id' => $model->product_id,
+                        ], [
+                            'class' => 'btn btn-sm btn-success',
+                        ]);
                     },
-                  ],
                 ],
+            ],
         ],
     ]); ?>
 
